@@ -1,5 +1,9 @@
 import streamlit as st
 import requests
+import pandas as pd  
+import matplotlib.pyplot as plt
+import seaborn as sns 
+
 
 st.title('Name Submission App')
 
@@ -20,3 +24,28 @@ if st.button("Submit"):
         st.success("Successfully sent your name!")
     else:
         st.error("Failed to send your name.")
+
+st.markdown('### Load CSV from GitHub into DataFrame')
+
+if st.button("Load csv from GitHub to DataFrame"):
+    # Assuming the 'names.csv' file is available at this URL
+    url = 'https://raw.githubusercontent.com/janduplessis883/streamlit_nameapp/master/names.csv'
+    
+    data = pd.read_csv(url)
+    
+    # Display the DataFrame
+    st.write(data.head())
+    
+# Automatically Display the DataFrame
+url = 'https://raw.githubusercontent.com/janduplessis883/streamlit_nameapp/master/names.csv'
+data = pd.read_csv(url)
+st.write("Here's the DataFrame:")
+st.write(data)
+
+# Automatically Display the Seaborn Plot
+st.write("And here's the Seaborn Plot:")
+
+plt.figure(figsize=(8, 6))
+sns.barplot(x='Name', y='Age', data=data)
+plt.title('Age by Name')
+st.pyplot()
