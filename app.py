@@ -45,7 +45,14 @@ st.write(data)
 # Automatically Display the Seaborn Plot
 st.write("And here's the Seaborn Plot:")
 
-plt.figure(figsize=(8, 6))
-sns.barplot(x='Name', y='Age', data=data)
-plt.title('Age by Name')
-st.pyplot()
+# Create a new figure and axis for the plot
+fig, ax = plt.subplots(figsize=(12, 8))
+
+# Create the barplot on the "ax" axis
+sns.barplot(x='City', y='Age', data=data, ax=ax, color='#a62a99')
+
+# Add title to the plot
+ax.set_title('Age by Name')
+
+# Show the plot in Streamlit
+st.pyplot(fig)
